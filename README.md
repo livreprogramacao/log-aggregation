@@ -424,6 +424,15 @@ public class LogProducer {
 }
 ```
 
+### Basic test.
+
+```bash
+curl -X POST http://localhost:8080/log \
+-H "Content-Type: application/json" \
+-d '{"message":"First log: Hello world!"}'
+```
+
+
 ### Step 1: RestTemplate Configuration
 
 Make sure to provide a `RestTemplate` bean in your configuration, so it can be injected into the `LogProducer`:
