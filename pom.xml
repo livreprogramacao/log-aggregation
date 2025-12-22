@@ -1,0 +1,135 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <!--
+    Section: project details
+    -->
+    <groupId>org.apache.kafka.logaggregation</groupId>
+    <artifactId>log-aggregation</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <!--
+    Section: project details
+    -->
+    <name>log-aggregation is like a DevOps project</name>
+    <description>A sample project for real-time data streaming using Apache Kafka</description>
+    <url>http://www.example.com</url>
+    <!--
+    Section: project details
+    -->
+    <properties>
+        <java.version>17</java.version>
+        <junit.version>5.7.2</junit.version>
+        <log4j.version>2.14.1</log4j.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <spring.boot.version>4.0.0</spring.boot.version> <!-- Define Spring Boot version -->
+        <main.class>org.apache.kafka.logaggregation.App</main.class> <!-- Define your main class here -->
+    </properties>
+    <!--
+    Section: dependencies details
+    -->
+    <dependencies>
+        <!--
+        Spring Framework
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring.boot.version}</version> <!-- Specify version -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version> <!-- Specify version -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>${spring.boot.version}</version> <!-- Specify version -->
+        </dependency>
+
+        <!--
+        Testing
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${spring.boot.version}</version> <!-- Specify version -->
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+        Other Dependencies as Required
+        -->
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+        Example: Database or Cloud Integration
+        -->
+
+    </dependencies>
+    <!--
+    Section: build
+    The <build> section is essential for defining how your project should be compiled, packaged, and tested.
+    This section enables you to configure various plugins crucial for building your application effectively.
+    Proper configuration of this section can optimize your build process and streamline development workflows.
+    -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.4</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass> <!-- Reference the main class property -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
