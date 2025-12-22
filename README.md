@@ -1,5 +1,69 @@
 ﻿# README
 
+## Project start
+
+```bash
+mvn archetype:generate \
+-DinteractiveMode=false \
+-DartifactId=log-aggregation \
+-DgroupId=org.apache.kafka.logaggregation \
+-DarchetypeArtifactId=maven-archetype-quickstart \
+&& cd log-aggregation \
+&& mvn package
+```
+
+
+## Change AppTest class
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class AppTest {
+
+    @Test
+    void additionTest() {
+        assertEquals(2, 1 + 1, "1 + 1 should equal 2");
+    }
+}
+
+mvn package spring-boot:run
+
+```
+
+
+## Version control with git
+
+```bash
+git add .gitignore README.md pom.xml src/
+git branch -M trunk
+git push -u origin trunk
+git commit -a -m 'First commit.'
+
+…or push an existing repository from the command line
+
+    git remote add origin git@github.com:livreprogramacao/log-aggregation.git
+    git branch -M main
+    git push -u origin main
+
+…or create a new repository on the command line
+
+    echo "# log-aggregation" >> README.md
+    git init
+    git add README.md
+    git commit -m "first commit"
+    git branch -M main
+    git remote add origin git@github.com:livreprogramacao/log-aggregation.git
+    git push -u origin main
+
+Default Lifecycle:
+Maven has a predefined lifecycle with phases such as validate, compile, test, package, install, and deploy.
+By default, when you run mvn package, Maven executes these phases sequentially.
+
+Details:
+    The spring-boot-maven-plugin allows you to create executable JAR files. The repackage goal ensures that the necessary dependencies are included in the final JAR.
+```
+
 ## Apache kafka is most usually use for it
 
 Apache Kafka is a powerful distributed event streaming platform widely used for various applications. Here are some of its primary use cases:
@@ -41,73 +105,24 @@ To implement log aggregation using Apache Kafka in a Spring Boot application wit
 
 ### Project Structure
 
-```
-kafka.apache.org/intro/
-org.apache.kafka.example
-log-aggregation
-
-mvn archetype:generate \
--DinteractiveMode=false \
--DartifactId=log-aggregation \
--DgroupId=org.apache.kafka.logaggregation \
--DarchetypeArtifactId=maven-archetype-quickstart \
-&& cd log-aggregation \
-&& mvn package
-
-git add .gitignore README.md pom.xml src/
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class AppTest {
-
-    @Test
-    void additionTest() {
-        assertEquals(2, 1 + 1, "1 + 1 should equal 2");
-    }
-}
-
-mvn -DskipTests package spring-boot:run
-
-…or push an existing repository from the command line
-
-git remote add origin git@github.com:livreprogramacao/log-aggregation.git
-git branch -M main
-git push -u origin main
-
-…or create a new repository on the command line
-
-echo "# log-aggregation" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin git@github.com:livreprogramacao/log-aggregation.git
-git push -u origin main
-
-Default Lifecycle:
-Maven has a predefined lifecycle with phases such as validate, compile, test, package, install, and deploy.
-By default, when you run mvn package, Maven executes these phases sequentially.
-
-Details:
-    The spring-boot-maven-plugin allows you to create executable JAR files. The repackage goal ensures that the necessary dependencies are included in the final JAR.
-
-
+```bash .apache.kafka.logaggregation
 ├── src
 │   ├── main
 │   │   ├── java
-│   │   │   └── com
-│   │   │       └── example
-│   │   │           └── logaggregation
-│   │   │               ├── config
-│   │   │               │   └── KafkaConfig.java
-│   │   │               ├── controller
-│   │   │               │   └── LogController.java
-│   │   │               ├── service
-│   │   │               │   └── LogService.java
-│   │   │               └── LogAggregationApplication.java
+│   │   │   └── org
+│   │   │       └── apache
+│   │   │           └── kafka
+│   │   │               └── logaggregation
+│   │   │                   ├── config
+│   │   │                   │   └── KafkaConfig.java
+│   │   │                   ├── controller
+│   │   │                   │   └── LogController.java
+│   │   │                   ├── service
+│   │   │                   │   └── LogService.java
+│   │   │                   └── LogAggregationApplication.java
 │   │   └── resources
 │   │       └── application.yml
+├── README.md
 └── pom.xml
 ```
 
@@ -257,7 +272,7 @@ First, include the necessary dependencies in your `pom.xml`:
 Create a configuration class for Kafka:
 
 ```java
-package com.example.logaggregation.config;
+package org.apache.kafka.logaggregation.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -295,7 +310,7 @@ public class KafkaConfig {
 Create a service to handle log messages:
 
 ```java
-package com.example.logaggregation.service;
+package org.apache.kafka.logaggregation.service;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -321,9 +336,9 @@ public class LogService {
 Implement a REST controller to receive log messages:
 
 ```java
-package com.example.logaggregation.controller;
+package org.apache.kafka.logaggregation.controller;
 
-import com.example.logaggregation.service.LogService;
+import org.apache.kafka.logaggregation.service.LogService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -359,7 +374,7 @@ spring:
 Create the main application class:
 
 ```java
-package com.example.logaggregation;
+package org.apache.kafka.logaggregation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -367,7 +382,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LogAggregationApplication {
     public static void main(String[] args) {
-        SpringApplication.run
+        SpringApplication.run(LogAggregationApplication.class, args);
+    }
+}
+```
 
 ---
 
@@ -380,7 +398,7 @@ To create a producer class that sends messages to your RESTful API endpoint (`/l
 Create a class named `LogProducer` that sends log messages to the `/log` endpoint:
 
 ```java
-package com.example.logaggregation.producer;
+package org.apache.kafka.logaggregation.producer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -408,7 +426,7 @@ public class LogProducer {
 Make sure to provide a `RestTemplate` bean in your configuration, so it can be injected into the `LogProducer`:
 
 ```java
-package com.example.logaggregation.config;
+package org.apache.kafka.logaggregation.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -429,9 +447,9 @@ public class AppConfig {
 You can call the `sendLog()` method from your application to send log messages. Here's a simple usage example in another component or service:
 
 ```java
-package com.example.logaggregation.service;
+package org.apache.kafka.logaggregation.service;
 
-import com.example.logaggregation.producer.LogProducer;
+import org.apache.kafka.logaggregation.producer.LogProducer;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -473,7 +491,7 @@ If you want to call a RESTful API without using `RestTemplate`, there are severa
 #### Example Implementation
 
 ```java
-package com.example.logaggregation.producer;
+package org.apache.kafka.logaggregation.producer;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -506,7 +524,7 @@ public class LogProducer {
 You need to configure `WebClient` in your Spring application:
 
 ```java
-package com.example.logaggregation.config;
+package org.apache.kafka.logaggregation.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -541,7 +559,7 @@ To use Apache HttpClient, you'll first need to add the dependency in your `pom.x
 Then, you can implement the producer like this:
 
 ```java
-package com.example.logaggregation.producer;
+package org.apache.kafka.logaggregation.producer;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -589,7 +607,7 @@ OkHttp is another popular library for making HTTP requests in Java. To use OkHtt
 ### Example Implementation with OkHttp
 
 ```java
-package com.example.logaggregation.producer;
+package org.apache.kafka.logaggregation.producer;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -640,7 +658,7 @@ First, you will need to create a socket server that listens for incoming log mes
 #### Socket Server Implementation
 
 ```java
-package com.example.logaggregation.server;
+package org.apache.kafka.logaggregation.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -695,7 +713,7 @@ Next, you will need a socket client to send log messages to the server. Here is 
 #### Socket Client Implementation
 
 ```java
-package com.example.logaggregation.producer;
+package org.apache.kafka.logaggregation.producer;
 
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -726,9 +744,9 @@ public class LogClient {
 You can now use the `LogClient` in your application to send log messages. Here’s how to implement it in a service:
 
 ```java
-package com.example.logaggregation.service;
+package org.apache.kafka.logaggregation.service;
 
-import com.example.logaggregation.producer.LogClient;
+import org.apache.kafka.logaggregation.producer.LogClient;
 import org.springframework.stereotype.Service;
 
 @Service
