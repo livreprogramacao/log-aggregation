@@ -1,5 +1,8 @@
 ﻿# README
 
+![kafka: top 5 use cases](kafka-top-5-use-cases.jpg)
+
+
 ## Project start
 
 ```bash
