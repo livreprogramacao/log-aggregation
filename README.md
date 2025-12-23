@@ -39,6 +39,8 @@ Kafka's versatility makes it a go-to solution for many organizations looking to 
 ### [Kafka quickstart](https://kafka.apache.org/quickstart/)
 
 ```bash
+
+
 tar -xzf /home/usuario/Downloads/bin/kafka_2.13-4.1.1.tgz
 
 #
@@ -86,6 +88,7 @@ To implement log aggregation using Apache Kafka in a Spring Boot application wit
 ## Project start
 
 ```bash
+
 mvn archetype:generate \
 -DinteractiveMode=false \
 -DartifactId=log-aggregation \
@@ -114,6 +117,8 @@ class AppTest {
 ## Update pom.xml and compile
 
 ```bash
+
+
 cp /home/usuario/Documentos/livre.programacao@gmail.com/wip/github.com/livreprogramacao/log-aggregation/pom.xml /tmp/log-aggregation/pom.xml
 mvn package spring-boot:run -f /tmp/log-aggregation/pom.xml
 ```
@@ -122,6 +127,8 @@ mvn package spring-boot:run -f /tmp/log-aggregation/pom.xml
 ## Version control with git
 
 ```bash
+
+
 git add .gitignore README.md pom.xml src/
 git branch -M trunk
 git push -u origin trunk
@@ -154,7 +161,7 @@ Details:
 
 ### Project Structure
 
-```bash .apache.kafka.logaggregation
+```bash.apache.kafka.logaggregation
 ├── src
 │   ├── main
 │   │   ├── java
@@ -470,12 +477,14 @@ public class LogProducer {
 }
 ```
 
-### Basic test.
+### Basic test using cURL.
 
 ```bash
+
 curl -X POST http://localhost:8080/log \
 -H "Content-Type: application/json" \
 -d '{"message":"First log: Hello world!"}'
+
 ```
 
 
