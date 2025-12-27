@@ -25,12 +25,13 @@ public class KafkaConfig {
         config.put("bootstrap.servers", "localhost:9092");
         config.put("key.serializer", StringSerializer.class);
         config.put("value.serializer", StringSerializer.class);
+        logger.debug("This is ['{}'] a config .", config);
         return new DefaultKafkaProducerFactory<>(config);
     }
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
-        logger.debug("This is a debug message.");
+        logger.debug("This is a debug message. Bean KafkaConfig set up done!");
         return new KafkaTemplate<>(producerFactory());
     }
 }

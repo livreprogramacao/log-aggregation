@@ -13,12 +13,13 @@ public class LogService {
     private static final String TOPIC = "logs";
 
     public LogService(KafkaTemplate<String, String> kafkaTemplate) {
-        logger.debug("This is a debug message.");
+        logger.info("This is a info message.");
         this.kafkaTemplate = kafkaTemplate;
+        logger.info("This is a Apache Kafka template - TransactionIdPrefix '[{}]' property.", kafkaTemplate.getTransactionIdPrefix());
     }
 
     public void logMessage(String message) {
-        logger.debug("This is a debug message.");
+        logger.debug("This '[{}]' is a message sent.", message);
         kafkaTemplate.send(TOPIC, message);
     }
 }

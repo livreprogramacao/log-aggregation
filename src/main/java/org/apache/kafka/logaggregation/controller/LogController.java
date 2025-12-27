@@ -19,8 +19,7 @@ public class LogController {
 
     @PostMapping("/log")
     public void receiveLog(@RequestBody String message) {
-        logger.debug("This is a debug message.");
-
+        logger.debug("This '[{}]' is a message get from Topic 'logs'.", message);
         logService.logMessage(message);
     }
 }
