@@ -147,7 +147,7 @@
         </plugins>
     </build>
     <!--
-    Section: dependencies details
+    Section: repositories details
     -->
     <repositories>
         <repository>
